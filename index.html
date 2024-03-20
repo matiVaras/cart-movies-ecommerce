@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RaVar Películas | TP 02</title>
+  <link href="https://cdn.materialdesignicons.com/5.9.55/css/materialdesignicons.min.css" rel="stylesheet">
+<link rel="shortcut icon" href="IMG/google-play-movie.png" type="image/x-icon">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./CSS/estilos.css">
+</head>
+
+<body>
+  <div id="appPeliculas">
+    <v-app>
+      <v-main>
+        <v-container>
+
+          <v-navigation-drawer color="deep-purple accent-4" v-model="drawer" app>
+            <v-list>
+              <v-list-item v-for="categoria in categorias" :key="categoria.id" v-on:click="filtrarPeliculas(categoria)">
+                <v-list-item-icon>
+                  <v-icon class="mdi" :class="[categoria.icon, 'color-primary']" v-text="categoria.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-title v-text="categoria.name"></v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-navigation-drawer>
+        
+          <v-app-bar app color="deep-purple accent-4" dark>
+            <v-app-bar-nav-icon v-on:click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-toolbar-title v-text="pageTitulo"></v-toolbar-title>
+          </v-app-bar>
+        
+          <v-container>
+            <v-text-field v-model="filtroNombre" v-on:input="filtrarPeliculas(categoriaSeleccionada)" append-icon="mdi-magnify" label="Buscar por nombre"></v-text-field>
+            <v-row>
+              <v-col v-for="pelicula in peliculasFiltradas" :key="pelicula.id">
+              </v-col>
+            </v-row>
+          </v-container>
+          
+          <div class="cart">
+            <h2 class="black--text headline">Carrito de Compras</h2>
+            <ul>
+              <li class="black--text" v-for="item in carrito" :key="item.id">
+                <span v-text="item.titulo"></span> - Precio: <span v-text="item.precio"></span>
+              </li>
+            </ul>
+            <p class="black--text total">Total: <span v-text="precioTotal() + ' USD'"></span></p>
+          </div>
+          <v-container>
+            <v-row>
+              <v-col v-for="pelicula in peliculasFiltradas" :key="pelicula.id" cols="12" sm="6" md="4" lg="3">
+                <v-card class="theme--dark">
+                  <v-img :src="pelicula.portada" :alt="pelicula.titulo"></v-img>
+                  <v-card-title class="title" v-text="pelicula.titulo"></v-card-title>
+                  <v-card-text>
+                    <p><v-icon class="color-primary">mdi-calendar</v-icon> <span v-text="pelicula.año"></span></p>
+                    <p class="genre"><v-icon class="color-primary">mdi-tag</v-icon> Género: <span v-text="pelicula.genero"></span></p>
+                    <p class="genre"><v-icon class="color-primary">mdi-currency-usd</v-icon> Precio: <span v-text="pelicula.precio + ' USD'"></span></p>
+                  </v-card-text>
+                  <v-card-actions class="card-actions">
+                    <div>
+                      <v-btn color="red accent-2" text v-on:click="verDetalles(pelicula)"><v-icon>mdi-plus</v-icon> <span v-text="'Ver más'"></span></v-btn>
+                    </div>
+                    <div>
+                      <v-btn color="red accent-2" v-on:click="addCarrito(pelicula)"><v-icon>mdi-cart-plus</v-icon> <span v-text="'Agregar'"></span></v-btn>
+                      <v-btn :color="pelicula.color" v-on:click="toggleFavorito(pelicula)">
+                        <v-icon :class="{'red--text': pelicula.favorito}">mdi-heart</v-icon>
+                      </v-btn>
+                    </div>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+          
+            <v-dialog ref="dialogoDetalles" v-model="dialogoDetallesVisible" max-width="600px" :content-class="dialogContentClass" :persistent="false">
+              <v-card v-if="peliculaSeleccionada">
+                <v-img :src="peliculaSeleccionada.portada" :alt="peliculaSeleccionada.titulo" class="mx-auto" width="300" height="400"></v-img>
+                <v-card-title class="title" v-text="peliculaSeleccionada.titulo"></v-card-title>
+                <v-card-text>
+                  <p><v-icon class="color-primary">mdi-calendar</v-icon> <span v-text="peliculaSeleccionada.año"></span></p>
+                  <p class="genre"><v-icon class="color-primary">mdi-tag</v-icon> Género: <span v-text="peliculaSeleccionada.genero"></span></p>
+                  <p class="genre"><v-icon class="color-primary">mdi-currency-usd</v-icon> Precio: <span v-text="peliculaSeleccionada.precio + ' USD'"></span></p>
+                </v-card-text>
+                <v-card-actions class="card-actions">
+                  <v-btn color="primary" v-on:click="cerrarModal">Cerrar</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-container>
+          
+                  
+
+                </v-container>
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+  
+  
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="./app.js"></script>
+
+</html>

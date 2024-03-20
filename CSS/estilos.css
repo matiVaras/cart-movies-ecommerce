@@ -1,0 +1,146 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  
+  color: #F2F2F2;
+}
+
+.v-card {
+  border-color: aliceblue!important;
+
+}
+header {
+ 
+  color: #F2F2F2;
+  padding: 10px;
+  text-align: center;
+}
+.v-list-item:hover {
+background-color: rgb(103, 103, 103)!important;
+}
+nav {
+  background-color: #0B2C4A !important;
+  padding: 10px;
+  text-align: center;
+ 
+  font-size: 16px;
+  font-weight: 600;
+}
+.v-list-item__title{
+
+  color: #F2F2F2!important;
+}
+
+nav a {
+  color: #F2F2F2;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.product-card {
+  background-color: #2A3659;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product-card img:hover {
+  transform: scale(1.1);
+}
+
+.product-card h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #F2F2F2;
+}
+
+.product-card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #F2F2F2;
+}
+
+.product-card .genre {
+  font-style: italic;
+  color: #F2F2F2;
+}
+
+.product-card .details {
+  margin-top: 10px;
+}
+
+.product-card .details a {
+  background-color: #cc662b;
+  color: #F2F2F2;
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.cart {
+  background-color: #31cb9aa5;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  
+}
+.favorito {
+  background-color: rgb(255, 249, 249) !important;
+  color: rgb(0, 0, 0);
+}
+.color-primary {
+  color: #fcbe7c!important; /* Reemplaza con el color que desees */
+}
+.cart h2 {
+  margin-bottom: 10px;
+  color: #F2F2F2;
+}
+
+/* .btncolor{
+ background-color:  #cc662b!important;
+} */
+
+.cart ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart li {
+  margin-bottom: 5px;
+  color: #F2F2F2;
+}
+
+.cart .total {
+  font-weight: bold;
+  color: #F2F2F2;
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para los iconos */
+.card-actions v-icon {
+  color: #F2F2F2;
+}
